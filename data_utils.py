@@ -182,7 +182,15 @@ class TextAudioSpeakerLoader(torch.utils.data.Dataset):
             bert = torch.zeros(1024, len(phone))
             ja_bert = bert_ori
             en_bert = torch.zeros(1024, len(phone))
+        elif language_str == "JP_BASE":
+            bert = torch.zeros(1024, len(phone))
+            ja_bert = bert_ori
+            en_bert = torch.zeros(1024, len(phone))
         elif language_str == "EN":
+            bert = torch.zeros(1024, len(phone))
+            ja_bert = torch.zeros(1024, len(phone))
+            en_bert = bert_ori
+        elif language_str == "EN_BASE":
             bert = torch.zeros(1024, len(phone))
             ja_bert = torch.zeros(1024, len(phone))
             en_bert = bert_ori

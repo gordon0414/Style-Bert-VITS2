@@ -177,7 +177,7 @@ SIL_PHONEMES_IDS = [SYMBOLS.index(i) for i in PUNCTUATION_SYMBOLS]
 NUM_TONES = NUM_ZH_TONES + NUM_JP_TONES + NUM_EN_TONES
 
 # Language maps
-LANGUAGE_ID_MAP = {"ZH": 0, "JP": 1, "EN": 2}
+LANGUAGE_ID_MAP = {"ZH": 0, "JP": 1, "EN": 2, "JP_BASE": 3, "EN_BASE": 4}
 NUM_LANGUAGES = len(LANGUAGE_ID_MAP.keys())
 
 # Language tone start map
@@ -185,6 +185,8 @@ LANGUAGE_TONE_START_MAP = {
     "ZH": 0,
     "JP": NUM_ZH_TONES,
     "EN": NUM_ZH_TONES + NUM_JP_TONES,
+    "JP_BASE": NUM_ZH_TONES,
+    "EN_BASE": NUM_ZH_TONES + NUM_JP_TONES,
 }
 
 

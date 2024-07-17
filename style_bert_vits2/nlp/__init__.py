@@ -46,6 +46,10 @@ def extract_bert_feature(
         from style_bert_vits2.nlp.english.bert_feature import extract_bert_feature
     elif language == Languages.ZH:
         from style_bert_vits2.nlp.chinese.bert_feature import extract_bert_feature
+    elif language == Languages.JP_BASE:
+        from style_bert_vits2.nlp.japanese_base.bert_feature import extract_bert_feature
+    elif language == Languages.EN_BASE:
+        from style_bert_vits2.nlp.english_base.bert_feature import extract_bert_feature
     else:
         raise ValueError(f"Language {language} not supported")
 
@@ -90,6 +94,19 @@ def clean_text(
 
         norm_text = normalize_text(text)
         phones, tones, word2ph = g2p(norm_text)
+    elif language == Languages.JP_BASE:
+        from style_bert_vits2.nlp.japanese_base.g2p import g2p
+        from style_bert_vits2.nlp.japanese_base.normalizer import normalize_text
+
+        norm_text = normalize_text(text)
+        phones, tones, word2ph = g2p(norm_text, use_jp_extra, raise_yomi_error)
+    elif language == Languages.EN_BASE:
+        from style_bert_vits2.nlp.english_base.g2p import g2p
+        from style_bert_vits2.nlp.english_base.normalizer import normalize_text
+
+        norm_text = normalize_text(text)
+        phones, tones, word2ph = g2p(norm_text)
+
     else:
         raise ValueError(f"Language {language} not supported")
 

@@ -16,6 +16,8 @@ class Languages(StrEnum):
     JP = "JP"
     EN = "EN"
     ZH = "ZH"
+    JP_BASE = "JP_BASE"
+    EN_BASE = "EN_BASE"
 
 
 # 言語ごとのデフォルトの BERT トークナイザーのパス
@@ -23,6 +25,8 @@ DEFAULT_BERT_TOKENIZER_PATHS = {
     Languages.JP: BASE_DIR / "bert" / "deberta-v2-large-japanese-char-wwm",
     Languages.EN: BASE_DIR / "bert" / "deberta-v3-large",
     Languages.ZH: BASE_DIR / "bert" / "chinese-roberta-wwm-ext-large",
+    Languages.JP_BASE: BASE_DIR / "bert" / "deberta-v2-base-japanese-char-wwm",
+    Languages.EN_BASE: BASE_DIR / "bert" / "deberta-v3-base"
 }
 
 # デフォルトのユーザー辞書ディレクトリ

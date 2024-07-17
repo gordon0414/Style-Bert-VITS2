@@ -134,6 +134,16 @@ def get_text(
                     raise InvalidPhoneError(
                         f"Length of given_phone ({len(given_phone)}) != sum of word2ph ({sum(word2ph)})"
                     )
+            elif language_str == Languages.JP_BASE:
+                from style_bert_vits2.nlp.japanese.g2p import adjust_word2ph
+
+                word2ph = adjust_word2ph(word2ph, phone, given_phone)
+                # 上記処理により word2ph の合計が given_phone の長さと一致するはず
+                # それでも一致しない場合、大半は読み上げテキストと given_phone が著しく乖離していて調整し切れなかったことを意味する
+                if len(given_phone) != sum(word2ph):
+                    raise InvalidPhoneError(
+                        f"Length of given_phone ({len(given_phone)}) != sum of word2ph ({sum(word2ph)})"
+                    )
             else:
                 raise InvalidPhoneError(
                     f"Length of given_phone ({len(given_phone)}) != sum of word2ph ({sum(word2ph)})"
@@ -181,12 +191,20 @@ def get_text(
         bert = torch.zeros(1024, len(phone))
         ja_bert = bert_ori
         en_bert = torch.zeros(1024, len(phone))
+    elif language_str == Languages.JP_BASE:
+        bert = torch.zeros(1024, len(phone))
+        ja_bert = bert_ori
+        en_bert = torch.zeros(1024, len(phone))
     elif language_str == Languages.EN:
         bert = torch.zeros(1024, len(phone))
         ja_bert = torch.zeros(1024, len(phone))
         en_bert = bert_ori
+    elif language_str == Languages.EN_BASE:
+        bert = torch.zeros(1024, len(phone))
+        ja_bert = torch.zeros(1024, len(phone))
+        en_bert = bert_ori
     else:
-        raise ValueError("language_str should be ZH, JP or EN")
+        raise ValueError("language_str should be ZH, JP, EN, JP_BASE, or EN_BASE")
 
     assert bert.shape[-1] == len(
         phone

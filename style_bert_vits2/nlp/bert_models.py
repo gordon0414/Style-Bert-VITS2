@@ -77,7 +77,7 @@ def load_model(
 
     # BERT モデルをロードし、辞書に格納して返す
     ## 英語のみ DebertaV2Model でロードする必要がある
-    if language == Languages.EN:
+    if language == Languages.EN or language == Languages.EN_BASE:
         model = cast(
             DebertaV2Model,
             DebertaV2Model.from_pretrained(
@@ -138,7 +138,7 @@ def load_tokenizer(
 
     # BERT トークナイザーをロードし、辞書に格納して返す
     ## 英語のみ DebertaV2Tokenizer でロードする必要がある
-    if language == Languages.EN:
+    if language == Languages.EN or language == Languages.EN_BASE:
         tokenizer = DebertaV2Tokenizer.from_pretrained(
             pretrained_model_name_or_path,
             cache_dir=cache_dir,
